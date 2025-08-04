@@ -1,0 +1,74 @@
+<controls:UserControl
+	x:Class="BlueStacks.BlueStacksUI.CustomToggleButton"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:Common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+	Loaded="UserControl_Loaded">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="7.5*" />
+			<RowDefinition
+				Height="30*" />
+			<RowDefinition
+				Height="7.5*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				x:Name="mIconColDef"
+				Width="40" />
+			<ColumnDefinition
+				x:Name="mAppLableColDef"
+				Width="68*" />
+			<ColumnDefinition
+				x:Name="mShowColDef"
+				Width="40*" />
+			<ColumnDefinition
+				Width="40*" />
+		</Grid.ColumnDefinitions>
+		<Common:CustomPictureBox
+			x:Name="mAppImage"
+			Grid.Column="0"
+			Grid.Row="0"
+			Grid.RowSpan="3"
+			ImageName="bluestackslogo"
+			Margin=" 0,0,10,0" />
+		<TextBlock
+			x:Name="mAppLabel"
+			HorizontalAlignment="Left"
+			VerticalAlignment="Center"
+			Grid.Column="1"
+			Grid.Row="0"
+			Grid.RowSpan="3"
+			Margin="10,0,10,0"
+			Text="Application Name"
+			TextTrimming="CharacterEllipsis"
+			MaxWidth="200"
+			FontSize="15"
+			Foreground="{Binding Path=ColorModel.[SettingsWindowForegroundDimColor]}" />
+		<Common:CustomCheckbox
+			x:Name="mMuteCheckBox"
+			Grid.Column="2"
+			Grid.Row="0"
+			Grid.RowSpan="3"
+			Content="Show"
+			Margin="2"
+			Checked="MuteButton_Checked"
+			Unchecked="MuteButton_Unchecked"
+			Indeterminate="MuteCheckBox_Indeterminate" />
+		<Common:CustomCheckbox
+			x:Name="mAutoHideCheckBox"
+			Grid.Column="3"
+			Grid.Row="0"
+			Grid.RowSpan="3"
+			Content="Auto Hide"
+			Margin="2"
+			Checked="AutoHideButton_Checked"
+			Unchecked="AutoHideButton_Unchecked"
+			Indeterminate="AutoHideCheckBox_Indeterminate" />
+	</Grid>
+</controls:UserControl>

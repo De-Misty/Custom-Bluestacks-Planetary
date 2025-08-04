@@ -1,0 +1,40 @@
+<controls:UserControl
+	x:Class="BlueStacks.BlueStacksUI.SchemeBookmarkControl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:Common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	Width="160"
+	xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+	DataContext="{Binding Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+	MouseEnter="UserControl_MouseEnter"
+	MouseLeave="UserControl_MouseLeave"
+	MouseDown="UserControl_PreviewMouseDown">
+	<Grid
+		Background="#00FFFFFF">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="12" />
+			<ColumnDefinition
+				Width="137" />
+			<ColumnDefinition
+				Width="11" />
+		</Grid.ColumnDefinitions>
+		<Common:CustomPictureBox
+			Name="mCheckbox"
+			Grid.Column="2"
+			ImageName="radio_unselected"
+			Visibility="Collapsed"
+			Width="12"
+			Height="12" />
+		<Common:CustomTextBox
+			Name="mSchemeName"
+			Grid.Column="1"
+			IsReadOnly="True"
+			Focusable="False"
+			Margin="0,6,10,6"
+			FontSize="12" />
+	</Grid>
+</controls:UserControl>

@@ -1,0 +1,985 @@
+<UserControl
+	x:Class="BlueStacks.BlueStacksUI.Sidebar"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:Common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	x:Name="mSidebar"
+	DataContext="{Binding Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+	SizeChanged="MSidebar_SizeChanged"
+	Loaded="Sidebar_Loaded">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary
+					Source="pack://application:,,,/HD-Common;component/UIElements/CustomSlider.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+			<Style
+				x:Key="LineStyle"
+				TargetType="{x:Type Separator}">
+				<Setter
+					Property="Margin"
+					Value="12,0,12,5" />
+				<Setter
+					Property="UIElement.Opacity"
+					Value="0.6" />
+				<Setter
+					Property="Background"
+					Value="{Binding Path=ColorModel.[HorizontalSeparator]}" />
+			</Style>
+			<Style
+				x:Key="CenteredVerticalOffsetStyle"
+				TargetType="{x:Type Popup}">
+				<Setter
+					Property="Popup.VerticalOffset">
+					<Setter.Value>
+						<MultiBinding
+							Converter="{Common:CenterToolTipConverter}">
+							<Binding
+								Path="PlacementTarget.ActualHeight"
+								RelativeSource="{RelativeSource Self}" />
+							<Binding
+								Path="Child.ActualHeight"
+								RelativeSource="{RelativeSource Self}" />
+						</MultiBinding>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<Border
+		x:Name="mBorder"
+		SnapsToDevicePixels="True"
+		ClipToBounds="True"
+		BorderBrush="{Binding ColorModel.[GameControlWindowBorderColor]}"
+		Background="{Binding ColorModel.[SidebarBackground]}">
+		<Grid
+			x:Name="mGrid">
+			<Grid.RowDefinitions>
+				<RowDefinition
+					Height="*" />
+				<RowDefinition
+					Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid
+				x:Name="mTopGrid"
+				Margin="2">
+				<StackPanel>
+					<StackPanel
+						x:Name="mElementsStackPanel"
+						Orientation="Vertical"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Top" />
+					<local:SidebarElement
+						x:Name="mMoreButton"
+						PreviewMouseLeftButtonUp="MMoreButton_PreviewMouseLeftButtonUp"
+						MouseLeave="MMoreButton_MouseLeave"
+						Visibility="Collapsed"
+						Margin="0,2,0,2"
+						ToolTip="{Binding LocaleModel.[STRING_MORE_BUTTON]}" />
+				</StackPanel>
+				<local:CustomPopUp
+					x:Name="mChangeTransparencyPopup"
+					Closed="ChangeTransparencyPopup_Closed"
+					MouseEnter="ChangeTransparencyPopup_MouseEnter"
+					MouseLeave="ChangeTransparencyPopup_MouseLeave"
+					AllowsTransparency="True"
+					Placement="Left"
+					StaysOpen="True"
+					HorizontalOffset="5"
+					Style="{StaticResource CenteredVerticalOffsetStyle}"
+					PopupAnimation="Fade">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder2}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder2"
+										Style="{StaticResource MaskBorder}" />
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="5" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="5" />
+										</Grid.RowDefinitions>
+										<Grid
+											Row="1">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+											</Grid.ColumnDefinitions>
+											<Common:CustomPictureBox
+												x:Name="mTranslucentControlsSliderButton"
+												Grid.Column="1"
+												ImageName="sidebar_overlay_popup"
+												HorizontalAlignment="Center"
+												VerticalAlignment="Center"
+												Height="20"
+												Width="20"
+												PreviewMouseLeftButtonUp="mTranslucentControlsSliderButton_PreviewMouseLeftButtonUp" />
+											<Slider
+												x:Name="transSlider"
+												Grid.Column="3"
+												Maximum="1"
+												Minimum="0"
+												Ticks="0.01"
+												IsMoveToPointEnabled="True"
+												Width="136"
+												HorizontalAlignment="Center"
+												VerticalAlignment="Center"
+												Orientation="Horizontal"
+												Style="{StaticResource CustomSlider}"
+												ValueChanged="TransparencySlider_ValueChanged" />
+										</Grid>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mVolumeSliderPopup"
+					Closed="VolumeSliderPopup_Closed"
+					MouseEnter="VolumeSliderPopup_MouseEnter"
+					MouseLeave="VolumeSliderPopup_MouseLeave"
+					AllowsTransparency="True"
+					Placement="Left"
+					StaysOpen="True"
+					HorizontalOffset="5"
+					Style="{StaticResource CenteredVerticalOffsetStyle}"
+					PopupAnimation="Fade">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder3}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder3"
+										Style="{StaticResource MaskBorder}" />
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="5" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="5" />
+											<RowDefinition
+												Height="1" />
+											<RowDefinition
+												Height="5" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="5" />
+										</Grid.RowDefinitions>
+										<Grid
+											Row="1">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="*" />
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+											</Grid.ColumnDefinitions>
+											<Common:CustomPictureBox
+												x:Name="mVolumeMuteUnmuteImage"
+												Grid.Column="1"
+												ImageName="sidebar_volume_popup"
+												HorizontalAlignment="Center"
+												VerticalAlignment="Center"
+												Height="20"
+												Width="20"
+												PreviewMouseLeftButtonUp="VolumeImage_PreviewMouseLeftButtonUp" />
+											<Slider
+												x:Name="mVolumeSlider"
+												Grid.Column="3"
+												Maximum="100"
+												Minimum="0"
+												Ticks="1"
+												IsMoveToPointEnabled="True"
+												HorizontalAlignment="Stretch"
+												VerticalAlignment="Center"
+												Focusable="False"
+												Orientation="Horizontal"
+												Style="{StaticResource CustomSlider}"
+												PreviewMouseLeftButtonUp="VolumeSlider_PreviewMouseLeftButtonUp"
+												ValueChanged="VolumeSlider_ValueChanged" />
+											<TextBlock
+												x:Name="mCurrentVolumeValue"
+												Grid.Column="5"
+												HorizontalAlignment="Center"
+												Visibility="Collapsed"
+												MinWidth="23"
+												MaxWidth="23"
+												Text="50"
+												FontSize="14"
+												Foreground="{Binding ColorModel.[SettingsWindowForegroundDimColor]}" />
+										</Grid>
+										<Grid
+											Row="3"
+											Margin="5,0"
+											Background="{Binding ColorModel.[HorizontalSeparator]}" />
+										<Grid
+											Row="5"
+											Margin="0,0,45,0">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+												<ColumnDefinition
+													Width="5" />
+											</Grid.ColumnDefinitions>
+											<Common:CustomPictureBox
+												x:Name="mMuteInstancesCheckboxImage"
+												Height="15"
+												Width="15"
+												Grid.Column="1"
+												ImageName="bgpcheckbox"
+												MouseLeftButtonUp="MuteInstancesCheckboxImage_MouseLeftButtonUp" />
+											<TextBlock
+												x:Name="mMuteAllInstancesTextBlock"
+												Grid.Column="3"
+												HorizontalAlignment="Left"
+												Text="{Binding LocaleModel.[STRING_MUTE_ALL_INSTANCES], FallbackValue='Mute all instances'}"
+												Foreground="{Binding ColorModel.[SettingsWindowForegroundDimColor]}"
+												MouseLeftButtonUp="MuteInstancesCheckboxImage_MouseLeftButtonUp" />
+										</Grid>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mOverlayTooltip"
+					AllowsTransparency="True"
+					StaysOpen="False"
+					HorizontalOffset="5"
+					IsOpen="False"
+					Placement="Left"
+					PopupAnimation="Fade"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder4}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder4"
+										Style="{StaticResource MaskBorder}" />
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition
+												Width="10" />
+											<ColumnDefinition
+												Width="Auto" />
+											<ColumnDefinition
+												Width="10" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="16" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="10" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="10" />
+										</Grid.RowDefinitions>
+										<Common:CustomPictureBox
+											Grid.Column="1"
+											Grid.ColumnSpan="2"
+											Grid.Row="0"
+											Grid.RowSpan="3"
+											Height="15"
+											VerticalAlignment="Top"
+											Margin="199.53,5,5,0"
+											ImageName="detail_close"
+											MouseLeftButtonUp="OverlayTooltipCPB_MouseLeftButtonUp" />
+										<TextBlock
+											x:Name="mOverlayPopUpTitle"
+											Grid.Row="1"
+											Grid.Column="1"
+											FontWeight="Bold"
+											TextWrapping="Wrap"
+											Text="{Binding LocaleModel.[STRING_ON_SCREEN_CONTROLS_TITLE], FallbackValue='On screen controls'}"
+											Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}" />
+										<TextBlock
+											x:Name="mOverlayPopUpMessage"
+											Grid.Row="2"
+											Grid.Column="1"
+											MaxWidth="210"
+											TextWrapping="Wrap"
+											FontWeight="Normal"
+											Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}" />
+										<Grid
+											Row="4"
+											Column="1">
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition
+													Width="15" />
+												<ColumnDefinition
+													Width="5" />
+												<ColumnDefinition
+													Width="Auto" />
+											</Grid.ColumnDefinitions>
+											<Common:CustomPictureBox
+												x:Name="mOverlayDoNotShowCheckboxImage"
+												ImageName="bgpcheckbox"
+												MouseLeftButtonUp="OverlayDoNotShowCheckbox_MouseLeftButtonUp" />
+											<TextBlock
+												x:Name="mOverlayDontShowPopUp"
+												Grid.Column="2"
+												HorizontalAlignment="Left"
+												Opacity="0.8"
+												Text="{Binding LocaleModel.[STRING_DOWNLOAD_GOOGLE_APP_POPUP_STRING_04], FallbackValue='Do not show again'}"
+												Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}"
+												MouseLeftButtonUp="OverlayDoNotShowCheckbox_MouseLeftButtonUp" />
+										</Grid>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Grid.Column="5"
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mMacroButtonPopup"
+					MouseEnter="MMacroButtonPopup_MouseEnter"
+					MouseLeave="MMacroButtonAndPopup_MouseLeave"
+					AllowsTransparency="True"
+					StaysOpen="True"
+					IsOpen="False"
+					HorizontalOffset="5"
+					Placement="Left"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder5}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder5"
+										Style="{StaticResource MaskBorder}" />
+									<StackPanel
+										Orientation="Vertical"
+										Background="{Binding Path=ColorModel.[SidebarBackground]}">
+										<local:MacroBookmarksPopup
+											x:Name="mMacroBookmarkPopup"
+											HorizontalAlignment="Left" />
+										<Grid
+											x:Name="mCustomiseSectionTag"
+											Visibility="Visible">
+											<Separator
+												x:Name="mCustomiseSectionBorderLine"
+												Style="{StaticResource LineStyle}" />
+										</Grid>
+										<Grid
+											Margin="0,0,0,6"
+											MaxWidth="160"
+											PreviewMouseLeftButtonUp="OpenMacroGridPreviewMouseLeftButtonUp"
+											MouseEnter="OpenMacroGridMouseEnter"
+											MouseLeave="OpenMacroGridMouseLeave">
+											<TextBlock
+												x:Name="mOpenMacroTextbox"
+												FontSize="12"
+												TextTrimming="CharacterEllipsis"
+												FontWeight="Bold"
+												MinHeight="18"
+												Margin="10,1,10,4"
+												VerticalAlignment="Top"
+												Text="{Binding Path=LocaleModel.[STRING_OPEN_MACRO_TOOL], FallbackValue='Open macro tool'}"
+												Foreground="{Binding Path=ColorModel.[GuidanceTextColorForeground]}"
+												ToolTip="{Binding Path=LocaleModel.[STRING_OPEN_MACRO_TOOL], FallbackValue='Open macro tool'}" />
+										</Grid>
+									</StackPanel>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mGameControlButtonPopup"
+					MouseEnter="GameControlButtonPopup_MouseEnter"
+					MouseLeave="GameControlButtonPopup_MouseLeave"
+					Closed="GameControlButtonPopup_Closed"
+					AllowsTransparency="True"
+					StaysOpen="False"
+					HorizontalOffset="5"
+					IsOpen="False"
+					Placement="Left"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder6}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder6"
+										Style="{StaticResource MaskBorder}" />
+									<Grid
+										Column="0"
+										Background="{Binding ColorModel.[ComboBoxBackgroundColor]}">
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+										</Grid.RowDefinitions>
+										<Grid>
+											<StackPanel
+												Name="mBookmarkedSchemesStackPanel"
+												Grid.Row="0"
+												Width="Auto" />
+										</Grid>
+										<Grid
+											Row="1"
+											Background="{Binding Path=ColorModel.[ComboBoxBackgroundColor]}"
+											PreviewMouseLeftButtonUp="OpenGameControlPreviewMouseLeftButtonUp"
+											MouseEnter="OpenGameControlMouseEnter"
+											MouseLeave="OpenGameControlMouseLeave">
+											<Grid.RowDefinitions>
+												<RowDefinition
+													Height="Auto" />
+												<RowDefinition
+													Height="Auto" />
+											</Grid.RowDefinitions>
+											<Separator
+												Grid.Row="0"
+												Style="{StaticResource LineStyle}" />
+											<TextBlock
+												x:Name="mOpenGameControlTextbox"
+												Grid.Row="1"
+												FontSize="12"
+												MinHeight="18"
+												Margin="12,0,10,4"
+												VerticalAlignment="Center"
+												Text="{Binding Path=LocaleModel.[STRING_CONTROLS_EDITOR], FallbackValue='Controls editor'}"
+												Foreground="{Binding Path=ColorModel.[ContextMenuItemForegroundColor]}" />
+										</Grid>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mRecordScreenPopup"
+					Closed="RecordScreenPopup_Closed"
+					AllowsTransparency="True"
+					StaysOpen="True"
+					HorizontalOffset="5"
+					IsOpen="False"
+					Placement="Left"
+					PopupAnimation="Fade"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder7}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder7"
+										Style="{StaticResource MaskBorder}" />
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition
+												Width="10" />
+											<ColumnDefinition
+												Width="Auto" />
+											<ColumnDefinition
+												Width="10" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="10" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="10" />
+										</Grid.RowDefinitions>
+										<Common:CustomPictureBox
+											x:Name="mRecordScreenClose"
+											Grid.Column="1"
+											Grid.ColumnSpan="2"
+											Grid.Row="0"
+											Grid.RowSpan="3"
+											Height="13"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Right"
+											Margin="5"
+											ImageName="detail_close"
+											Visibility="Collapsed"
+											IsVisibleChanged="RecordScreenClose_IsVisibleChanged"
+											MouseLeftButtonUp="RecordScreenPopupClose_MouseLeftButtonUp" />
+										<TextBlock
+											x:Name="RecordScreenPopupHeader"
+											Grid.Row="1"
+											Grid.Column="1"
+											FontWeight="Bold"
+											Text="{Binding LocaleModel.[STRING_RECORD_SCREEN]}"
+											Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}" />
+										<TextBlock
+											x:Name="RecordScreenPopupBody"
+											Grid.Row="2"
+											Grid.Column="1"
+											FontWeight="Normal"
+											Text="{Binding LocaleModel.[STRING_RECORD_SCREEN_PLAYING]}"
+											Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}" />
+										<TextBlock
+											x:Name="RecordScreenPopupHyperlink"
+											Grid.Row="2"
+											Grid.Column="1"
+											Visibility="Collapsed">
+											<Hyperlink
+												Style="{StaticResource HyperlinkStyle}"
+												Click="RecordScreenPopupHyperlink_Click">
+												<InlineUIContainer>
+													<TextBlock
+														x:Name="mRecorderClickLink" />
+												</InlineUIContainer>
+											</Hyperlink>
+										</TextBlock>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mScreenshotPopup"
+					AllowsTransparency="True"
+					StaysOpen="True"
+					HorizontalOffset="5"
+					IsOpen="False"
+					Placement="Left"
+					PopupAnimation="Fade"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="Auto" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder8}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder8"
+										Style="{StaticResource MaskBorder}" />
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition
+												Width="10" />
+											<ColumnDefinition
+												Width="Auto" />
+											<ColumnDefinition
+												Width="10" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="10" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="10" />
+										</Grid.RowDefinitions>
+										<Common:CustomPictureBox
+											x:Name="mScreenshotClose"
+											Grid.Column="1"
+											Grid.ColumnSpan="2"
+											Grid.Row="0"
+											Grid.RowSpan="3"
+											Height="13"
+											VerticalAlignment="Top"
+											HorizontalAlignment="Right"
+											Margin="5"
+											ImageName="detail_close"
+											MouseLeftButtonUp="ScreenshotPopupClose_MouseLeftButtonUp" />
+										<TextBlock
+											x:Name="ScreenshotPopupHeader"
+											Grid.Row="1"
+											Grid.Column="1"
+											Margin="0,0,20,0"
+											FontWeight="Bold"
+											Text="{Binding LocaleModel.[STRING_SCREENSHOT_SAVED]}"
+											Foreground="{Binding ColorModel.[ContextMenuItemForegroundColor]}" />
+										<TextBlock
+											x:Name="ScreenshotPopupHyperlink"
+											Grid.Row="2"
+											Grid.Column="1">
+											<Hyperlink
+												Style="{StaticResource HyperlinkStyle}"
+												Click="ScreenshotPopupHyperlink_Click">
+												<InlineUIContainer>
+													<TextBlock
+														x:Name="mScreenshotClickLink"
+														Text="{Binding LocaleModel.[STRING_CLICK_TO_SEE_SCREENSHOT]}" />
+												</InlineUIContainer>
+											</Hyperlink>
+										</TextBlock>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Column="1">
+								<Path
+									Data="M0,0 L8,6 L0,12"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[PopupBorderBrush]}"
+									Fill="{Binding ColorModel.[ContextMenuItemBackgroundColor]}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mGameControlsBlurbPopup"
+					AllowsTransparency="True"
+					StaysOpen="False"
+					HorizontalOffset="5"
+					IsOpen="False"
+					Placement="Left"
+					PopupAnimation="Fade"
+					Style="{StaticResource CenteredVerticalOffsetStyle}">
+					<Border
+						Style="{StaticResource ShadowBorder}">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition
+									Height="8" />
+								<RowDefinition
+									Height="Auto" />
+								<RowDefinition
+									Height="8" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="8" />
+								<ColumnDefinition
+									Width="*" />
+								<ColumnDefinition
+									Width="8" />
+							</Grid.ColumnDefinitions>
+							<Border
+								Style="{StaticResource OuterBorder}"
+								Grid.Row="1"
+								Grid.Column="1"
+								Background="{Binding ColorModel.[BlueMouseOutGridBackGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+								BorderBrush="{Binding ColorModel.[BlueMouseOutBorderBackground], Source='{x:Static Common:BlueStacksUIBinding.Instance}'}">
+								<Grid>
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder10}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder10"
+										Style="{StaticResource MaskBorder}"
+										Background="{Binding ColorModel.[BlueMouseOutGridBackGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}'}" />
+									<Grid
+										x:Name="ContentGrid">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition
+												Width="12" />
+											<ColumnDefinition
+												Width="Auto" />
+											<ColumnDefinition
+												Width="12" />
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition
+												Height="12" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="Auto" />
+											<RowDefinition
+												Height="12" />
+										</Grid.RowDefinitions>
+										<TextBlock
+											Name="headerTextBlock"
+											Grid.Row="1"
+											Grid.Column="1"
+											TextWrapping="WrapWithOverflow"
+											MaxWidth="218"
+											Margin="0,0,0,6"
+											FontSize="18"
+											HorizontalAlignment="Left"
+											FontWeight="Bold"
+											Text="{Binding LocaleModel.[STRING_VIEW_CONTROLS_HEADER], FallbackValue='View Controls'}"
+											Foreground="{Binding ColorModel.[BlueMouseOutForeGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}', FallbackValue=#FFFFFF}" />
+										<TextBlock
+											Name="bodyTextBlock"
+											Grid.Row="2"
+											Grid.Column="1"
+											TextWrapping="WrapWithOverflow"
+											MaxWidth="218"
+											HorizontalAlignment="Left"
+											Margin="0,0,0,12"
+											FontSize="16"
+											Text="{Binding LocaleModel.[STRING_VIEW_CONTROLS_MESSAGE], FallbackValue='Click the guide icon to view game controls again.'}"
+											Foreground="{Binding ColorModel.[BlueMouseOutForeGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}', FallbackValue=#FFFFFF}" />
+										<Grid
+											Row="3"
+											Column="1">
+											<Common:CustomButton
+												x:Name="OkayButton"
+												ButtonColor="BackgroundWhiteBorder"
+												Height="36"
+												FontSize="16"
+												BorderThickness="1.2"
+												Visibility="Visible"
+												Margin="0,0,10,0"
+												MinWidth="70"
+												MaxWidth="100"
+												HorizontalAlignment="Left"
+												Cursor="Hand"
+												Content="{Binding Path=LocaleModel.[STRING_OKAY], FallbackValue=Okay}"
+												Click="OnBoardingPopupNext_Click" />
+										</Grid>
+									</Grid>
+								</Grid>
+							</Border>
+							<Grid
+								Row="1"
+								Column="2"
+								Visibility="visible">
+								<Path
+									x:Name="RightArrow"
+									Data="M0,0 L8,8 L0,16"
+									Margin="-1,0,0,0"
+									VerticalAlignment="Center"
+									Stroke="{Binding ColorModel.[BlueMouseOutGridBackGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+									Fill="{Binding ColorModel.[BlueMouseOutGridBackGround], Source='{x:Static Common:BlueStacksUIBinding.Instance}'}" />
+							</Grid>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+				<local:CustomPopUp
+					x:Name="mMoreElements"
+					Opened="MMoreElements_Opened"
+					Closed="MMoreElements_Closed"
+					MouseLeave="MMoreButton_MouseLeave"
+					PopupAnimation="None"
+					AllowsTransparency="True"
+					StaysOpen="True"
+					Placement="Left"
+					Style="{StaticResource CenteredVerticalOffsetStyle}"
+					RenderOptions.EdgeMode="Aliased"
+					PlacementTarget="{Binding ElementName=mMoreButton}">
+					<Border
+						Style="{StaticResource ShadowBorder}"
+						Effect="{x:Null}">
+						<Grid>
+							<Border
+								Style="{StaticResource OuterBorder}"
+								BorderThickness="0"
+								Background="{Binding Path=ColorModel.[SidebarBackground]}">
+								<Grid
+									x:Name="mPopupGrid">
+									<UIElement.OpacityMask>
+										<VisualBrush
+											Stretch="None"
+											Visual="{Binding ElementName=mMaskBorder}" />
+									</UIElement.OpacityMask>
+									<Border
+										x:Name="mMaskBorder"
+										Style="{StaticResource MaskBorder}"
+										Background="{Binding Path=ColorModel.[SidebarBackground]}" />
+									<local:SidebarPopup
+										x:Name="mSidebarPopup"
+										MouseLeftButtonUp="MSidebarPopup_MouseLeftButtonUp"
+										PreviewMouseDoubleClick="MSidebarPopup_PreviewMouseDoubleClick" />
+								</Grid>
+							</Border>
+						</Grid>
+					</Border>
+				</local:CustomPopUp>
+			</Grid>
+			<Grid
+				x:Name="mBottomGrid"
+				Margin="2"
+				Row="1">
+				<StackPanel
+					x:Name="mStaticButtonsStackPanel"
+					Orientation="Vertical"
+					HorizontalAlignment="Center"
+					VerticalAlignment="Bottom" />
+			</Grid>
+		</Grid>
+	</Border>
+</UserControl>

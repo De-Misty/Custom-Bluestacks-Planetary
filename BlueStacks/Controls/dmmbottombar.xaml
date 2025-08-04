@@ -1,0 +1,593 @@
+<controls:UserControl
+	x:Class="BlueStacks.BlueStacksUI.DMMBottomBar"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:Common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+	Background="{Binding Path=ColorModel.[BottomBarColor]}"
+	DataContext="{Binding Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+	SizeChanged="UserControl_SizeChanged">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<Style
+				x:Key="SliderRepeatButton"
+				TargetType="{x:Type RepeatButton}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="IsTabStop"
+					Value="False" />
+				<Setter
+					Property="Focusable"
+					Value="False" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type RepeatButton}">
+							<Border
+								BorderThickness="1"
+								Background="#8EAABB"
+								Height="5" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<Style
+				x:Key="SliderRepeatButton1"
+				TargetType="{x:Type RepeatButton}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type RepeatButton}">
+							<Border
+								SnapsToDevicePixels="True"
+								Background="#5D9CE3"
+								BorderThickness="1"
+								Height="5" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<Style
+				x:Key="SliderRepeatButton2"
+				TargetType="{x:Type RepeatButton}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="IsTabStop"
+					Value="False" />
+				<Setter
+					Property="Focusable"
+					Value="False" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type RepeatButton}">
+							<Border
+								BorderThickness="1"
+								Background="#8EAABB"
+								Width="5" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<Style
+				x:Key="SliderRepeatButton3"
+				TargetType="{x:Type RepeatButton}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type RepeatButton}">
+							<Border
+								Background="#5D9CE3"
+								BorderThickness="1"
+								Width="5" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<Style
+				x:Key="SliderThumb"
+				TargetType="{x:Type Thumb}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type Thumb}">
+							<Rectangle
+								Height="15"
+								Width="5"
+								RadiusX="2"
+								RadiusY="4"
+								Fill="{Binding Path=ColorModel.[SliderButtonColor]}" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<Style
+				x:Key="SliderVerticalThumb"
+				TargetType="{x:Type Thumb}">
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type Thumb}">
+							<Rectangle
+								Height="5"
+								Width="15"
+								RadiusX="4"
+								RadiusY="2"
+								Fill="{Binding Path=ColorModel.[SliderButtonColor]}" />
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+			<ControlTemplate
+				x:Key="Slider"
+				TargetType="{x:Type Slider}">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition
+							Height="Auto" />
+						<RowDefinition
+							Height="Auto"
+							MinHeight="{TemplateBinding FrameworkElement.MinHeight}" />
+						<RowDefinition
+							Height="Auto" />
+					</Grid.RowDefinitions>
+					<Track
+						x:Name="PART_Track"
+						Grid.Row="1">
+						<Track.DecreaseRepeatButton>
+							<RepeatButton
+								Command="Slider.DecreaseLarge"
+								Style="{StaticResource SliderRepeatButton1}" />
+						</Track.DecreaseRepeatButton>
+						<Track.Thumb>
+							<Thumb
+								Style="{StaticResource SliderThumb}" />
+						</Track.Thumb>
+						<Track.IncreaseRepeatButton>
+							<RepeatButton
+								Command="Slider.IncreaseLarge"
+								Style="{StaticResource SliderRepeatButton}" />
+						</Track.IncreaseRepeatButton>
+					</Track>
+				</Grid>
+			</ControlTemplate>
+			<ControlTemplate
+				x:Key="Slider1"
+				TargetType="{x:Type Slider}">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition
+							Width="Auto" />
+						<ColumnDefinition
+							Width="Auto"
+							MinWidth="{TemplateBinding FrameworkElement.MinWidth}" />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<Track
+						x:Name="PART_Track"
+						Grid.Column="1">
+						<Track.DecreaseRepeatButton>
+							<RepeatButton
+								Command="Slider.DecreaseLarge"
+								Style="{StaticResource SliderRepeatButton3}" />
+						</Track.DecreaseRepeatButton>
+						<Track.Thumb>
+							<Thumb
+								Style="{StaticResource SliderVerticalThumb}" />
+						</Track.Thumb>
+						<Track.IncreaseRepeatButton>
+							<RepeatButton
+								Command="Slider.IncreaseLarge"
+								Style="{StaticResource SliderRepeatButton2}" />
+						</Track.IncreaseRepeatButton>
+					</Track>
+				</Grid>
+			</ControlTemplate>
+			<Style
+				x:Key="Horizontal_Slider"
+				TargetType="{x:Type Slider}">
+				<Setter
+					Property="Focusable"
+					Value="False" />
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Style.Triggers>
+					<Trigger
+						Property="Slider.Orientation"
+						Value="Horizontal">
+						<Setter
+							Property="MinHeight"
+							Value="21" />
+						<Setter
+							Property="MinWidth"
+							Value="104" />
+						<Setter
+							Property="Template"
+							Value="{StaticResource Slider}" />
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+			<Style
+				x:Key="Vertical_Slider"
+				TargetType="{x:Type Slider}">
+				<Setter
+					Property="Focusable"
+					Value="False" />
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Style.Triggers>
+					<Trigger
+						Property="Slider.Orientation"
+						Value="Vertical">
+						<Setter
+							Property="Template"
+							Value="{StaticResource Slider1}" />
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+			<Style
+				x:Key="CenteredHorizontalOffsetStyle"
+				TargetType="{x:Type Popup}">
+				<Setter
+					Property="Popup.HorizontalOffset">
+					<Setter.Value>
+						<MultiBinding
+							Converter="{Common:CenterToolTipConverter}">
+							<Binding
+								Path="PlacementTarget.ActualWidth"
+								RelativeSource="{RelativeSource Self}" />
+							<Binding
+								Path="Child.ActualWidth"
+								RelativeSource="{RelativeSource Self}" />
+						</MultiBinding>
+					</Setter.Value>
+				</Setter>
+			</Style>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="3" />
+			<RowDefinition
+				Height="2" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="18" />
+		</Grid.RowDefinitions>
+		<Grid
+			Row="0"
+			Background="#000000" />
+		<Grid
+			Row="1"
+			Background="#3a454b" />
+		<Grid
+			x:Name="DMMBottomGrid"
+			Row="2">
+			<StackPanel
+				Orientation="Horizontal"
+				HorizontalAlignment="Right">
+				<Common:CustomPictureBox
+					x:Name="mKeyMapSwitch"
+					ImageName="keymapswitch"
+					Visibility="Collapsed"
+					Width="30"
+					Margin="0,2,5,2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_KEYMAPPING_ENABLED], FallbackValue='Keyboard controls enabled'}"
+					PreviewMouseLeftButtonUp="SwitchKeyMapButton_PreviewMouseLeftButtonUp" />
+				<Common:CustomPictureBox
+					x:Name="mKeyMapButton"
+					ImageName="keymap"
+					Visibility="Collapsed"
+					Width="30"
+					Margin="0,2,9,2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_OPEN_KEYMAPPING_UI], FallbackValue='Open KeyMapping UI'}"
+					PreviewMouseLeftButtonUp="KeyMapButton_PreviewMouseLeftButtonUp" />
+				<Common:CustomPictureBox
+					x:Name="mTranslucentControlsButton"
+					ImageName="eye_off"
+					Visibility="Collapsed"
+					Width="30"
+					Margin="0,2,9,2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_SHOW_ON_OVERLAY], FallbackValue='Toggle controls on game'}"
+					PreviewMouseLeftButtonUp="TranslucentControlsButton_PreviewMouseLeftButtonUp" />
+				<Common:CustomPictureBox
+					x:Name="mScreenshotBtn"
+					ImageName="scn"
+					Width="30"
+					Margin="0, 2, 9, 2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_TOOLBAR_CAMERA], FallbackValue='Take Screenshot'}"
+					PreviewMouseLeftButtonUp="ScreenshotBtn_MouseUp" />
+				<Common:CustomPictureBox
+					x:Name="mVolumeBtn"
+					ImageName="volume_small"
+					Width="30"
+					Margin="0, 2, 9, 2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_VOLUME_CONTROL], FallbackValue='Volume Control'}"
+					PreviewMouseLeftButtonUp="VolumeBtn_MouseUp" />
+				<Common:CustomPictureBox
+					x:Name="mFullscreenBtn"
+					ImageName="window_big"
+					Width="30"
+					Margin="0, 2, 9, 2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_UPDATED_FULLSCREEN_BUTTON_TOOLTIP], FallbackValue='Toggle Full Screen'}"
+					PreviewMouseLeftButtonUp="FullScreenBtn_MouseUp" />
+				<Common:CustomPictureBox
+					x:Name="mSettingsBtn"
+					ImageName="config"
+					Width="30"
+					Margin="0, 2, 9, 2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_SETTING_APP], FallbackValue=Settings}"
+					PreviewMouseLeftButtonUp="SettingsBtn_MouseUp" />
+				<Common:CustomPictureBox
+					x:Name="mRecommendedWindowBtn"
+					ImageName="recommend"
+					Width="30"
+					Margin="0, 2, 9, 2"
+					ToolTip="{Binding Path=LocaleModel.[STRING_RECOMMENDED_BTN_TOOLTIP], FallbackValue='Recommended Area'}"
+					PreviewMouseLeftButtonUp="RecommendedWindowBtn_PreviewMouseLeftButtonUp" />
+			</StackPanel>
+		</Grid>
+		<Grid
+			Row="3"
+			Background="#FF000000">
+			<TextBlock
+				Text="Powered by BlueStacks"
+				Foreground="#FFFFFFFF"
+				FontSize="10"
+				Margin="0,0,0,2"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center" />
+		</Grid>
+		<local:CustomPopUp
+			x:Name="mVolumePopup"
+			StaysOpen="False"
+			Width="160"
+			Height="40"
+			Placement="Top"
+			Style="{StaticResource CenteredHorizontalOffsetStyle}"
+			VerticalOffset="-2"
+			HorizontalOffset="-90"
+			PlacementTarget="{Binding ElementName=mVolumeBtn}">
+			<Grid
+				Background="{Binding Path=ColorModel.[ContextMenuItemBackgroundColor]}">
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="15*" />
+					<RowDefinition
+						Height="75*" />
+					<RowDefinition
+						Height="10*" />
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						Width="5*" />
+					<ColumnDefinition
+						Width="15*" />
+					<ColumnDefinition
+						Width="5*" />
+					<ColumnDefinition
+						Width="65*" />
+					<ColumnDefinition
+						Width="10*" />
+				</Grid.ColumnDefinitions>
+				<Common:CustomPictureBox
+					x:Name="volumesSliderImage"
+					Grid.Row="1"
+					Grid.Column="1"
+					ImageName="volume_small"
+					PreviewMouseLeftButtonUp="VolumeSliderImage_PreviewMouseLeftButtonUp" />
+				<Slider
+					x:Name="mVolumeSlider"
+					Cursor="Hand"
+					Grid.Row="1"
+					Grid.Column="3"
+					Maximum="100"
+					Minimum="0"
+					Margin="0,5,0,0"
+					Value="33"
+					IsMoveToPointEnabled="True"
+					Style="{DynamicResource Horizontal_Slider}"
+					PreviewMouseLeftButtonUp="VolumeSlider_PreviewMouseLeftButtonUp" />
+			</Grid>
+		</local:CustomPopUp>
+		<local:CustomPopUp
+			x:Name="mKeyMapPopup"
+			AllowsTransparency="True"
+			StaysOpen="False"
+			IsOpen="False"
+			Placement="Top"
+			PopupAnimation="Slide"
+			Style="{StaticResource CenteredHorizontalOffsetStyle}"
+			VerticalOffset="-5"
+			PlacementTarget="{Binding ElementName=mKeyMapButton}">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						Height="Auto" />
+					<RowDefinition
+						Height="10" />
+				</Grid.RowDefinitions>
+				<Border
+					Grid.Row="0"
+					BorderThickness="1"
+					CornerRadius="{Binding Path=CornerRadiusModel.[PopupRadius]}"
+					BorderBrush="{Binding Path=ColorModel.[PopupBorderBrush]}"
+					Background="{Binding Path=ColorModel.[ContextMenuItemBackgroundColor]}"
+					MouseLeftButtonUp="KeyMapPopup_PreviewMouseLeftButtonUp">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="10" />
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="10" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="16" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="10" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="10" />
+						</Grid.RowDefinitions>
+						<Common:CustomPictureBox
+							Grid.Column="1"
+							Grid.ColumnSpan="2"
+							Grid.Row="0"
+							Height="15"
+							Width="15"
+							Grid.RowSpan="2"
+							HorizontalAlignment="Right"
+							VerticalAlignment="Top"
+							Margin="5"
+							ImageName="detail_close"
+							MouseLeftButtonUp="ClosePopup_MouseLeftButtonUp" />
+						<TextBlock
+							x:Name="mKeyMappingPopUp1"
+							Grid.Row="1"
+							Grid.Column="1"
+							Text="{Binding Path=LocaleModel.[STRING_DEFAULT_KEYBOARD_MAPPING_SETTING_01]}"
+							Foreground="{Binding Path=ColorModel.[ContextMenuItemForegroundColor]}" />
+						<TextBlock
+							x:Name="mKeyMappingPopUp3"
+							Grid.Row="2"
+							Grid.Column="1"
+							Text="{Binding Path=LocaleModel.[STRING_DEFAULT_KEYBOARD_MAPPING_SETTING_02]}"
+							Foreground="{Binding Path=ColorModel.[ContextMenuItemForegroundColor]}" />
+						<Grid
+							Row="4"
+							Column="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition
+									Width="15" />
+								<ColumnDefinition
+									Width="5" />
+								<ColumnDefinition
+									Width="Auto" />
+							</Grid.ColumnDefinitions>
+							<Common:CustomPictureBox
+								x:Name="mDoNotPromptChkBx"
+								ImageName="bgpcheckbox"
+								MouseLeftButtonUp="DoNotPromptManageGP_MouseLeftButtonUp" />
+							<TextBlock
+								x:Name="mKeyMappingDontShowPopUp"
+								Grid.Column="2"
+								HorizontalAlignment="Left"
+								Text="{Binding Path=LocaleModel.[STRING_DOWNLOAD_GOOGLE_APP_POPUP_STRING_04]}"
+								Foreground="{Binding Path=ColorModel.[ContextMenuItemForegroundDimColor]}"
+								MouseLeftButtonUp="DoNotPromptManageGP_MouseLeftButtonUp" />
+						</Grid>
+					</Grid>
+				</Border>
+				<Grid
+					Row="1">
+					<Path
+						x:Name="DownArrow"
+						Grid.Column="5"
+						Data="M0,0 L8,10 L16,0"
+						Margin="0,-1,0,0"
+						HorizontalAlignment="Center"
+						Stroke="{Binding Path=ColorModel.[PopupBorderBrush]}"
+						Fill="{Binding Path=ColorModel.[ContextMenuItemBackgroundColor]}" />
+				</Grid>
+			</Grid>
+		</local:CustomPopUp>
+		<local:CustomPopUp
+			x:Name="mChangeTransparencyPopup"
+			AllowsTransparency="True"
+			Width="160"
+			Height="40"
+			Placement="Top"
+			StaysOpen="False"
+			Style="{StaticResource CenteredHorizontalOffsetStyle}"
+			VerticalOffset="-2"
+			HorizontalOffset="-90">
+			<DockPanel
+				VerticalAlignment="Stretch"
+				HorizontalAlignment="Stretch"
+				Opacity=".95"
+				Background="{Binding Path=ColorModel.[ContextMenuItemBackgroundColor]}">
+				<Common:CustomPictureBox
+					x:Name="mTranslucentControlsSliderButton"
+					DockPanel.Dock="Left"
+					ImageName="eye_off"
+					Margin="12,8,0,8"
+					PreviewMouseLeftButtonUp="mTranslucentControlsSliderButton_PreviewMouseLeftButtonUp" />
+				<Slider
+					x:Name="transSlider"
+					DockPanel.Dock="Left"
+					Maximum="1"
+					Minimum="0"
+					Cursor="Hand"
+					Value="0"
+					VerticalAlignment="Center"
+					IsMoveToPointEnabled="True"
+					HorizontalAlignment="Center"
+					Orientation="Horizontal"
+					Style="{DynamicResource Horizontal_Slider}"
+					ValueChanged="TransparencySlider_ValueChanged" />
+			</DockPanel>
+		</local:CustomPopUp>
+	</Grid>
+</controls:UserControl>
