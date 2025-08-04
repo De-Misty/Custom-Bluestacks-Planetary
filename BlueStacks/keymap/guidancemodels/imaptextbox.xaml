@@ -1,0 +1,173 @@
+<common:XTextBox
+	x:Class="BlueStacks.BlueStacksUI.IMapTextBox"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	x:Name="mTextBox"
+	Style="{DynamicResource IMapTextBoxStyle}">
+	<FrameworkElement.Resources>
+		<ResourceDictionary>
+			<ContextMenu
+				x:Key="TextBoxContextMenu"
+				Width="0"
+				Height="0" />
+			<Style
+				x:Key="IMapTextBoxStyle"
+				TargetType="{x:Type local:IMapTextBox}">
+				<Setter
+					Property="FrameworkElement.ContextMenu"
+					Value="{StaticResource TextBoxContextMenu}" />
+				<Setter
+					Property="UIElement.SnapsToDevicePixels"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.OverridesDefaultStyle"
+					Value="True" />
+				<Setter
+					Property="FrameworkElement.FocusVisualStyle"
+					Value="{x:Null}" />
+				<Setter
+					Property="UIElement.AllowDrop"
+					Value="True" />
+				<Setter
+					Property="BorderThickness"
+					Value="1" />
+				<Setter
+					Property="Padding"
+					Value="2" />
+				<Setter
+					Property="FontSize"
+					Value="14" />
+				<Setter
+					Property="VerticalContentAlignment"
+					Value="Center" />
+				<Setter
+					Property="HorizontalContentAlignment"
+					Value="Center" />
+				<Setter
+					Property="Foreground"
+					Value="{Binding Path=ColorModel.[TextBoxForegroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+				<Setter
+					Property="Background"
+					Value="{Binding Path=ColorModel.[TextBoxBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+				<Setter
+					Property="BorderBrush"
+					Value="{Binding Path=ColorModel.[TextBoxBorderColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+				<Setter
+					Property="Template">
+					<Setter.Value>
+						<ControlTemplate
+							TargetType="{x:Type local:IMapTextBox}">
+							<Border
+								x:Name="Border"
+								BorderThickness="{TemplateBinding Control.BorderThickness}"
+								BorderBrush="{TemplateBinding Control.BorderBrush}"
+								Background="{TemplateBinding Control.Background}">
+								<ScrollViewer
+									x:Name="PART_ContentHost"
+									Margin="0" />
+							</Border>
+							<ControlTemplate.Triggers>
+								<Trigger
+									Property="UIElement.IsMouseOver"
+									Value="True">
+									<Setter
+										TargetName="Border"
+										Property="Border.BorderBrush"
+										Value="{Binding Path=ColorModel.[TextBoxHoverBorderColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+								</Trigger>
+								<Trigger
+									Property="UIElement.IsKeyboardFocused"
+									Value="True">
+									<Setter
+										TargetName="Border"
+										Property="Border.BorderBrush"
+										Value="{Binding Path=ColorModel.[TextBoxFocussedBorderColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										TargetName="Border"
+										Property="Border.Background"
+										Value="{Binding Path=ColorModel.[TextBoxFocussedBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										Property="Background"
+										Value="{Binding Path=ColorModel.[TextBoxFocussedBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										Property="Foreground"
+										Value="{Binding Path=ColorModel.[TextBoxFocussedForegroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										Property="local:IMapTextBox.IsKeyBoardInFocus"
+										Value="True" />
+								</Trigger>
+								<Trigger
+									Property="IsEnabled"
+									Value="False">
+									<Setter
+										TargetName="Border"
+										Property="UIElement.Opacity"
+										Value="0.6" />
+									<Setter
+										Property="UIElement.Opacity"
+										Value="0.6" />
+								</Trigger>
+								<Trigger
+									Property="common:XTextBox.InputTextValidity"
+									Value="Error">
+									<Setter
+										TargetName="Border"
+										Property="Border.BorderBrush"
+										Value="{Binding Path=ColorModel.[TextBoxErrorBorderColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										TargetName="Border"
+										Property="Border.Background"
+										Value="{Binding Path=ColorModel.[TextBoxErrorBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										Property="Background"
+										Value="{Binding Path=ColorModel.[TextBoxErrorBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+								</Trigger>
+								<Trigger
+									Property="common:XTextBox.InputTextValidity"
+									Value="Warning">
+									<Setter
+										TargetName="Border"
+										Property="Border.BorderBrush"
+										Value="{Binding Path=ColorModel.[TextBoxWarningBorderColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										TargetName="Border"
+										Property="Border.Background"
+										Value="{Binding Path=ColorModel.[TextBoxWarningBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+									<Setter
+										Property="Background"
+										Value="{Binding Path=ColorModel.[TextBoxWarningBackgroundColor], Source='{x:Static common:BlueStacksUIBinding.Instance}'}" />
+								</Trigger>
+							</ControlTemplate.Triggers>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+				<Style.Triggers>
+					<Trigger
+						Property="TextBoxBase.IsReadOnly"
+						Value="True">
+						<Setter
+							Property="Template">
+							<Setter.Value>
+								<ControlTemplate
+									TargetType="{x:Type TextBox}">
+									<TextBlock
+										x:Name="mTextBlock"
+										Text="{TemplateBinding TextBox.Text}"
+										TextTrimming="CharacterEllipsis"
+										VerticalAlignment="Center"
+										Width="{TemplateBinding FrameworkElement.Width}"
+										Foreground="{Binding Path=ColorModel.[TextBoxFocussedForegroundColor]}"
+										ToolTip="{Binding Path=Text, RelativeSource={RelativeSource self}}" />
+								</ControlTemplate>
+							</Setter.Value>
+						</Setter>
+					</Trigger>
+				</Style.Triggers>
+			</Style>
+		</ResourceDictionary>
+	</FrameworkElement.Resources>
+</common:XTextBox>

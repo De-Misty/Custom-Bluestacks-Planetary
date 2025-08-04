@@ -1,0 +1,209 @@
+<controls:UserControl
+	x:Class="BlueStacks.BlueStacksUI.CanvasElement"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.BlueStacksUI"
+	xmlns:Common="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	x:Name="mCanvasElement"
+	MinWidth="40"
+	MinHeight="40"
+	xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
+	DataContext="{Binding Source='{x:Static Common:BlueStacksUIBinding.Instance}'}"
+	MouseEnter="MoveIcon_MouseEnter"
+	MouseLeave="MoveIcon_MouseLeave"
+	PreviewMouseRightButtonUp="CanvasElement_PreviewMouseRightButtonUp">
+	<FrameworkElement.Resources>
+		<Common:XamlSizeConverter
+			x:Key="XamlSizeConverter" />
+		<Style
+			x:Key="CenteredHorizontalOffsetStyle"
+			TargetType="{x:Type Popup}">
+			<Setter
+				Property="Popup.HorizontalOffset">
+				<Setter.Value>
+					<MultiBinding
+						Converter="{Common:CenterToolTipConverter}">
+						<Binding
+							Path="PlacementTarget.ActualWidth"
+							RelativeSource="{RelativeSource Self}" />
+						<Binding
+							Path="Child.ActualWidth"
+							RelativeSource="{RelativeSource Self}" />
+					</MultiBinding>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</FrameworkElement.Resources>
+	<Grid
+		Loaded="Grid_Loaded">
+		<Grid
+			x:Name="mToggleModeGrid"
+			Column="0"
+			ColumnSpan="3"
+			MinHeight="20"
+			Margin="10,30,0,0"
+			Visibility="Collapsed"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Bottom">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition
+					Width="*" />
+				<ColumnDefinition
+					Width="Auto" />
+				<ColumnDefinition
+					Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBlock
+				x:Name="mToggleMode1"
+				Grid.Column="0"
+				Text="Tap"
+				TextWrapping="WrapWithOverflow"
+				Padding="0,0,5,0"
+				FontSize="12"
+				Foreground="{Binding Path=ColorModel.[GameControlWindowHeaderForegroundColor]}" />
+			<Common:CustomPictureBox
+				x:Name="mToggleImage"
+				AllowClickThrough="True"
+				Grid.Column="1"
+				ImageName="right_switch"
+				MaxHeight="16"
+				MaxWidth="22"
+				Margin="0,-4,0,0"
+				VerticalAlignment="Center"
+				HorizontalAlignment="Center"
+				PreviewMouseLeftButtonUp="mToggleImage_PreviewMouseLeftButtonUp" />
+			<TextBlock
+				x:Name="mToggleMode2"
+				Grid.Column="2"
+				Text="Long press"
+				TextWrapping="WrapWithOverflow"
+				Padding="5,0,0,0"
+				FontSize="12"
+				Foreground="{Binding Path=ColorModel.[GameControlWindowHeaderForegroundColor]}" />
+		</Grid>
+		<Grid>
+			<Grid
+				x:Name="mCanvasGrid"
+				Visibility="Visible"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center">
+				<Grid
+					x:Name="mKeyRepeatGrid"
+					Margin="0,0,3,0"
+					Visibility="Collapsed">
+					<Common:CustomPictureBox
+						AllowClickThrough="True"
+						ImageName="tap_repeat_up_arrow"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						MinHeight="15"
+						MaxHeight="15"
+						Margin="0,5,60,0"
+						Height="{Binding Converter='{StaticResource XamlSizeConverter}', ElementName=mCanvasElement, Path=ActualHeight, ConverterParameter=.1}"
+						PreviewMouseLeftButtonUp="UpArrow_PreviewMouseDown" />
+					<TextBlock
+						x:Name="mCountText"
+						Margin="4,16,25,0"
+						Text="5"
+						Foreground="#FFFFFFFF"
+						FontWeight="Bold" />
+					<Common:CustomPictureBox
+						AllowClickThrough="True"
+						ImageName="tap_repeat_down_arrow"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Top"
+						MinHeight="15"
+						MaxHeight="15"
+						Margin="0,30,60,0"
+						Height="{Binding Converter='{StaticResource XamlSizeConverter}', ElementName=mCanvasElement, Path=ActualHeight, ConverterParameter=.1}"
+						PreviewMouseLeftButtonUp="DownArrow_PreviewMouseDown" />
+				</Grid>
+				<Common:CustomPictureBox
+					x:Name="mActionIcon"
+					AllowClickThrough="True"
+					Grid.Column="0"
+					Grid.ColumnSpan="3" />
+				<Common:CustomPictureBox
+					x:Name="mActionIcon2"
+					AllowClickThrough="True"
+					Grid.Column="0"
+					Grid.ColumnSpan="3"
+					IsAlwaysHalfSize="True" />
+				<Common:CustomPictureBox
+					x:Name="mCloseIcon"
+					AllowClickThrough="True"
+					Visibility="Visible"
+					ImageName="delete_canvas"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Top"
+					IsAlwaysHalfSize="True"
+					MinHeight="16"
+					MaxHeight="24"
+					Height="{Binding Converter='{StaticResource XamlSizeConverter}', ElementName=mCanvasElement, Path=ActualHeight, ConverterParameter=.1}"
+					PreviewMouseDown="DeleteIcon_PreviewMouseDown" />
+				<Common:CustomPictureBox
+					x:Name="mResizeIcon"
+					AllowClickThrough="True"
+					Visibility="Hidden"
+					ImageName="resize_icon"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Bottom"
+					IsAlwaysHalfSize="True"
+					MouseEnter="ResizeIcon_MouseEnter"
+					MouseLeave="ResizeIcon_MouseLeave" />
+				<Common:CustomPictureBox
+					x:Name="mSkillImage"
+					AllowClickThrough="False"
+					Visibility="Hidden"
+					ImageName="menu_settings"
+					VerticalAlignment="Center"
+					HorizontalAlignment="Center"
+					Margin="-50,48,10,0"
+					MinHeight="14"
+					MaxHeight="14"
+					MouseLeftButtonUp="MSkillImage_MouseLeftButtonUp"
+					MouseEnter="MSkillImage_MouseEnter"
+					MouseLeave="MSkillImage_MouseLeave" />
+			</Grid>
+			<Grid
+				x:Name="mGrid">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition
+						x:Name="mColumn0"
+						Width="1*" />
+					<ColumnDefinition
+						x:Name="mColumn1"
+						Width="Auto" />
+					<ColumnDefinition
+						x:Name="mColumn2"
+						Width="3*" />
+					<ColumnDefinition
+						x:Name="mColumn3"
+						Width="Auto" />
+					<ColumnDefinition
+						x:Name="mColumn4"
+						Width="1*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition
+						x:Name="mRow0"
+						Height="1*" />
+					<RowDefinition
+						x:Name="mRow1"
+						Height="Auto" />
+					<RowDefinition
+						x:Name="mRow2"
+						Height="3*" />
+					<RowDefinition
+						x:Name="mRow3"
+						Height="Auto" />
+					<RowDefinition
+						x:Name="mRow4"
+						Height="1*" />
+				</Grid.RowDefinitions>
+			</Grid>
+		</Grid>
+	</Grid>
+</controls:UserControl>
