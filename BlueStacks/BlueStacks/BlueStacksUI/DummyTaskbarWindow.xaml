@@ -1,0 +1,16 @@
+<local:CustomWindow
+	x:Class="BlueStacks.BlueStacksUI.DummyTaskbarWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:local="clr-namespace:BlueStacks.Common;assembly=HD-Common"
+	x:Name="mDummyTaskbarWindow"
+	Height="1"
+	Width="1"
+	WindowStyle="None"
+	xmlns:bluestacksui="clr-namespace:BlueStacks.BlueStacksUI"
+	Loaded="DummyTaskbarWindow_Loaded"
+	Closing="DummyTaskbarWindow_Closing">
+	<Grid />
+</local:CustomWindow>
