@@ -1,0 +1,911 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E46436B-A703-4300-AE76-B9EBF3B5B3CF}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bluestacks</RootNamespace>
+    <AssemblyName>Bluestacks</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Bluestacks.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DiscordRPC">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\DiscordRPC.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="HD-Common">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\HD-Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Vanara.PInvoke.DwmApi">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Vanara.PInvoke.DwmApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Vanara.PInvoke.Shared">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Vanara.PInvoke.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows7.Multitouch">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Windows7.Multitouch.dll</HintPath>
+    </Reference>
+    <Reference Include="Windows7.Multitouch.WPF">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Windows7.Multitouch.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="Xilium.CefGlue">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Xilium.CefGlue.dll</HintPath>
+    </Reference>
+    <Reference Include="Xilium.CefGlue.WPF">
+      <HintPath>..\..\..\..\..\ProgramData\BlueStacks_bgp64\Client\Xilium.CefGlue.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System.Windows.Interactivity" />
+    <Reference Include="mscorlib" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alias.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AboutSettingsControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AdvancedGameControlWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AdvancedSettingsItemPanel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Animator.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\AppHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppIconModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppIconPromotionObject.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppIconUI.xaml.cs">
+      <DependentUpon>AppIconUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\AppInfoExtractor.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppNotificationsToggleButton.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppPackageListObject.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppRecommendation.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppRecommendationSection.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppSpecificCustomCursorInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppSuggestionPromotion.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AppTabButton.xaml.cs">
+      <DependentUpon>AppTabButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\AppTabButtons.xaml.cs">
+      <DependentUpon>AppTabButtons.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\AppUsageTimer.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\AutoCompleteComboBox.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BackupRestoreSettingsControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BGPHelper.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BlueStacksAdvancedExit.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BluestacksProcessHelper.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BlueStacksUIUtils.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BlueStacksUpdateData.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BlueStacksUpdater.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BlurbMessageControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BootBanner.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BootPromotion.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Browser.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BrowserControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BrowserSubscriber.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BTv\BTVManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\BTv\StreamManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CallOfDutyGameSettingViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CanvasElement.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CefHelper.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CFGReorderWindow.xaml.cs">
+      <DependentUpon>CFGReorderWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\ClientStats.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ClientStatsEvent.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CloudNotificationManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ComboBoxSchemeControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CommonHandlers.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Compression.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ContainerWindow.xaml.cs">
+      <DependentUpon>ContainerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\Controls\ChangeThemeWindow.xaml.cs">
+      <DependentUpon>ChangeThemeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\Controls\SkinSelectorControl.xaml.cs">
+      <DependentUpon>SkinSelectorControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\CurrentGame.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CursorMode.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CustomPersistentToastPopupControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CustomPopUp.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CustomScrollViewer.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CustomThumbnail.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\CustomToggleButton.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Custom\FpsNotificationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\Custom\FpsNotificationForm.Designer.cs">
+      <DependentUpon>FpsNotificationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\DateTimeHelper.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DeviceProfileControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DimControlWithProgresBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DimOverlayControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Discord.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DisplaySettingsControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DMMBottomBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DMMFullScreenTopBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DMMProgressControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DMMRecommendedWindow.xaml.cs">
+      <DependentUpon>DMMRecommendedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\DMMScreenshotSettingControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DownloadInstallApk.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DownloadInstallOem.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DualTextBlockControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\DummyTaskbarWindow.xaml.cs">
+      <DependentUpon>DummyTaskbarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\EngineSettingViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ExportMacroWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ExportSchemesWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ExtensionPopupControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FadeTrimming.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FileImporter.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FpsBind.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Fraction.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FractionException.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FreeFireGameSettingViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FrontendHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FrontendOTSControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FrontendPopupControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FullScreenToastPopupControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\FullScreenTopBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GameAwareOnboardingInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GameOnboardingControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GameSetting.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GameSettingView.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GameSettingViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GenericNotificationManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GiftTabUserControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Gl3CustomWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GlobalKeyBoardMouseHooks.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GraphicsQuality.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GrmHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GrmManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GroupByGrid.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceCategoryEditModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceCategoryViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceCloudInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceCloudInfoManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceData.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceDataTemplateSelector.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceEditDecimalModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceEditModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceEditTextModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceListToStringConverter.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceVideoWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\GuidanceWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\HelpArticle.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\HelpArticleInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Helper\ViewModelLocator.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\HomeApp.xaml.cs">
+      <DependentUpon>HomeApp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\HomeAppManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\HomeAppTabButton.xaml.cs">
+      <DependentUpon>HomeAppTabButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\HTTPHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\HttpHandlerSetup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\IControlFordimOverLay.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\IDimOverlayControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\IMActionItem.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ImageTranslateControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\IMapTextBox.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ImportMacroScriptsControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ImportMacroWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ImportSchemesWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ImportSchemesWindowControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\InGameResolution.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\IntereopRect.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ITopBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\KeymapCanvasWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\KeymapExtraSettingWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\KMManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroAddedDragControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroBookmarksPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroOverlay.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroRecorderWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroSettingsWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroToAdd.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroTopBarPlayControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MacroTopBarRecordControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\MainWindowEventArgs.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MainWindowsStaticComponents.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MergeMacroWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MinimizeBlueStacksOnCloseView.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MinimizeBlueStacksOnCloseViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MiscStatsTag.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MiscUtils.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MOBAOtherSettingsMoreInfoPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MOBASkillSettingsMoreInfoPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MOBASkillSettingsPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\MyCustomCefV8Handler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NativeMethods.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NCSoftTopBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NCSoftUtils.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NoInternetControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NotificationDrawer.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NotificationDrawerItem.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NotificationModeExitPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NotificationModeInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\NotificationsSettings.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OnBoardingInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OnboardingOverlayControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OnBoardingPopupWindow.xaml.cs">
+      <DependentUpon>OnBoardingPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\Opt.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OtherAppGameSetting.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OtsFeedbackControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\OverlayLabelControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PennerDoubleAnimation.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PennerDoubleAnimationTypeConverter.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PercentageChangedEventArgs.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PercentageChangedEventHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PikaNotificationControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PopupBrowserControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PortableInstaller.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PostBootCloudInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PostBootCloudInfoManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PostOtsWelcomeWindowControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PreferenceDropDownControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PreferencesSettingsControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ProgressBar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PromotionControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PromotionManager.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PromotionObject.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\PromptGoogleSigninControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\PubgGameSettingViewModel.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuestRule.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuestRuleState.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitActionCollection.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitActionElement.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitActionItem.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitActionItemCTA.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitActionItemProperty.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitPopupBrowserControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\QuitPopupControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RawInputClass.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RawMouseButtons.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RawMouseFlags.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RecommendedAppItem.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RecommendedApps.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RecommendedAppsSection.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\RenderProcessHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SchemeBookmarkControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SchemeComboBox.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ScreenLockControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SearchRecommendation.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SecurityBreach.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SecurityMetrics.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SettingsWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SettingsWindowDropdown.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ShortcutKeyControlElement.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ShortcutKeysControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Sidebar.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SidebarConfig.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SidebarElement.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SidebarPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SingleMacroControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SkillIconToolTipPopup.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SlideShowControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SpeedUpBlueStacks.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SpeedUpBluestacksUserControl.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\Stats.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\StepperTextBox.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\SynchronizerWindow.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\TabChangeEventArgs.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\TabType.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ThemeEditorWindow.xaml.cs">
+      <DependentUpon>ThemeEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\TopBar.xaml.cs">
+      <DependentUpon>TopBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\TopbarOptions.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\UpdateDownloadProgress.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\UpdatePrompt.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\VideoRecordingStatus.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\VideoThumbnailInfo.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\WelcomeTab.xaml.cs">
+      <DependentUpon>WelcomeTab.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BlueStacks\BlueStacksUI\WidgetIcon.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\WindowWndProcHandler.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ZipFileEntry.cs" />
+    <Compile Include="BlueStacks\BlueStacksUI\ZipStorer.cs" />
+    <Compile Include="Callback.cs" />
+    <Compile Include="DeviceType.cs" />
+    <Compile Include="Direction.cs" />
+    <Compile Include="DontForwardKeys.cs" />
+    <Compile Include="Dpad.cs" />
+    <Compile Include="EdgeScroll.cs" />
+    <Compile Include="FreeLook.cs" />
+    <Compile Include="IMAction.cs" />
+    <Compile Include="IMConfig.cs" />
+    <Compile Include="IMControlScheme.cs" />
+    <Compile Include="KeyActionType.cs" />
+    <Compile Include="KeyEvent.cs" />
+    <Compile Include="KeyInput.cs" />
+    <Compile Include="LookAround.cs" />
+    <Compile Include="MetaData.cs" />
+    <Compile Include="Microsoft\CodeAnalysis\EmbeddedAttribute.cs" />
+    <Compile Include="MOBADpad.cs" />
+    <Compile Include="MOBASkill.cs" />
+    <Compile Include="MOBASkillCancel.cs" />
+    <Compile Include="MouseZoom.cs" />
+    <Compile Include="Pan.cs" />
+    <Compile Include="PanShoot.cs" />
+    <Compile Include="Positions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Raw.cs" />
+    <Compile Include="Rotate.cs" />
+    <Compile Include="Script.cs" />
+    <Compile Include="Scroll.cs" />
+    <Compile Include="SendOriginalKeys.cs" />
+    <Compile Include="ShowImagesOnOverlay.cs" />
+    <Compile Include="State.cs" />
+    <Compile Include="Swipe.cs" />
+    <Compile Include="System\Runtime\CompilerServices\IsReadOnlyAttribute.cs" />
+    <Compile Include="Tap.cs" />
+    <Compile Include="TapRepeat.cs" />
+    <Compile Include="Tilt.cs" />
+    <Compile Include="Zoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="BlueStacks\BlueStacksUI\Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="BlueStacks\BlueStacksUI\App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="BlueStacks\BlueStacksUI\AppIconUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\AppTabButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\AppTabButtons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\CFGReorderWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\ContainerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\Controls\ChangeThemeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\Controls\SkinSelectorControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\DMMRecommendedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\DummyTaskbarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\HomeApp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\HomeAppTabButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\OnBoardingPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\ThemeEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\TopBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BlueStacks\BlueStacksUI\WelcomeTab.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\autocompletecombobox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\bluestacksadvancedexit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\blurbmessagecontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\custompersistenttoastpopupcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\customscrollviewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\dimcontrolwithprogresbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\dimoverlaycontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\dmmbottombar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\dmmfullscreentopbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\dmmprogresscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\exportmacrowindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\extensionpopupcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\frontendotscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\frontendpopupcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\fullscreentoastpopupcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\fullscreentopbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\genericnotification\notificationdrawer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\genericnotification\notificationdraweritem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\gifttabusercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\gl3customwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\imagetranslatecontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\importmacroscriptscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\importmacrowindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macroaddeddragcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrobookmarkspopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrooverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrorecorderwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrosettingswindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrotoadd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrotopbarplaycontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\macrotopbarrecordcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\mergemacrowindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\minimizebluestacksonclose\view\minimizebluestacksoncloseview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ncsettingsdropdown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ncsofttopbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\nointernetcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\notificationmodeexitpopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\otsfeedbackcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\pikanotificationcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\popupbrowsercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\postotswelcomewindowcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\preferencedropdowncontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\progressbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\promotioncontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\promptgooglesignincontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\quitactionelement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\quitpopupbrowsercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\quitpopupcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\recommendedappitem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\recommendedapps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\recommendedappssection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\schemebookmarkcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\screenlockcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\aboutsettingscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\appnotificationstogglebutton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\backuprestoresettingscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\customtogglebutton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\deviceprofilecontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\dmmscreenshotsettingcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\gamesettingview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\notificationssettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\preferencessettingscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\shortcutkeycontrolelement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="controls\settingswindows\shortcutkeyscontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\sidebar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\sidebarelement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\sidebarpopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\singlemacrocontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\slideshowcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\speedupbluestacks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\speedupbluestacksusercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\synchronizerwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\topbaroptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\updatedownloadprogress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\updateprompt.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\videorecordingstatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\widgeticon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\advancedgamecontrolwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\guidancemodels\imaptextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\guidancemodels\steppertextbox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\guidancewindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\keymapcanvaswindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\keymapextrasettingwindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\advancedsettingsitempanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\canvaselement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\comboboxschemecontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\dualtextblockcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\exportschemeswindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\gameonboardingcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\guidancevideowindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\importschemeswindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\importschemeswindowcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\mobaothersettingsmoreinfopopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\mobaskillsettingsmoreinfopopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\mobaskillsettingspopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\onboardingoverlaycontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\overlaylabelcontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\schemecombobox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="keymap\uielement\skillicontooltippopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\scrollviewerstyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
